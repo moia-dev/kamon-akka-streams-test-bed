@@ -15,10 +15,10 @@ See [io.moia.kamon.log4j2.LoggingTest](https://github.com/moia-dev/kamon-akka-st
 
 
 
-At MOIA we use the Kamon to set a MDC logging context. 
-We use the  [io.moia.kamon.log4j2.KamonContextDataInjector](https://github.com/moia-dev/kamon-akka-streams-test-bed/blob/master/src/main/scala/io/moia/kamon/log4j2/Logging.scala)
-to set the MDC context.
-All log statements will have the context available.
+At MOIA we use Kamon to set a MDC logging context. 
+A custom data injector [io.moia.kamon.log4j2.KamonContextDataInjector](https://github.com/moia-dev/kamon-akka-streams-test-bed/blob/master/src/main/scala/io/moia/kamon/log4j2/Logging.scala)
+is used to achieve this goal.
+If a context is available, all log statements will print a TraceId to the console.
 The LoggingTest makes sure, that the MDC is set.
 
 Expectation: the context can be used to set a MDC for logging.
