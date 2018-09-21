@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- reload configuration every 30 seconds -->
+<Configuration monitorInterval="30">
+    <Appenders>
+        <Console name="STDOUT">
+            <PatternLayout>
+                <pattern>%style{TraceId=%X{TraceId}}{Red} %date{HH:mm:ss} %highlight{%-5level} %style{%logger{1}}{Blue} %msg %ex{full}%n</pattern>
+            </PatternLayout>
+        </Console>
+    </Appenders>
+
+    <Loggers>
+        <!-- The final root level can be controlled via the env var LOGGING_LEVEL -->
+        <Root level="${env:LOGGING_LEVEL:-info}">
+            <AppenderRef ref="STDOUT"/>
+        </Root>
+    </Loggers>
+</Configuration>
