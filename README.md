@@ -33,7 +33,7 @@ It combines a source with a map operation that flows to a sink.
 
 Expectation:  The context is propagated during the flow. 
 
-**Status: not working.**
+**Status: Works!**
 
 
 ### 3) Sub stream processing
@@ -44,7 +44,7 @@ A new context is created in the sub-flow that is later on combined with the oute
 
 Expectation: Both inner as well as outer context is propagated during the flow. 
 
-**Status: not working.**
+**Status: Works!**
 
 ### 4) Async stream processing
 See [io.moia.kamon.AsyncStreamTest](https://github.com/moia-dev/kamon-akka-streams-test-bed/blob/master/src/test/scala/io/moia/kamon/AsyncStreamTest.scala)
@@ -66,7 +66,7 @@ The context is gathered after elements are flowing from the custom stage.
 
 Expectation: the context is propagated and available after the custom stage. 
 
-**Status: not working.**
+**Status: Works!**
 
 ### 6) Graph stream processing
 See [io.moia.kamon.GraphTest](https://github.com/moia-dev/kamon-akka-streams-test-bed/blob/master/src/test/scala/io/moia/kamon/GraphTest.scala)

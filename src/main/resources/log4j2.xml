@@ -12,7 +12,7 @@
 
     <Loggers>
         <!-- The final root level can be controlled via the env var LOGGING_LEVEL -->
-        <Root level="${env:LOGGING_LEVEL:-info}">
+        <Root level="${env:LOGGING_LEVEL:-debug}">
             <AppenderRef ref="STDOUT"/>
         </Root>
     </Loggers>

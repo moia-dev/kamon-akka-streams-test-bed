@@ -1,6 +1,7 @@
 package io.moia.kamon
 import io.moia.kamon.log4j2.Logging
 import kamon.Kamon
+import kamon.context.Storage.Scope
 
 trait TraceIdContext {
 
@@ -13,4 +14,9 @@ trait TraceIdContext {
     *  Return the current traceId.
     */
   def currentTraceId(): Option[String] = Kamon.currentContext().get(Logging.TraceId)
+
+  /**
+    * Create a new scope with given trace id.
+    */
+  def setTraceId(id: String): Scope = Kamon.storeContext(Kamon.currentContext().withKey(Logging.TraceId, Some(id)))
 }

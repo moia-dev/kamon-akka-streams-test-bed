@@ -35,16 +35,23 @@ class SubStreamTest extends UnitTest with AkkaTest {
           currentTraceId() shouldBe Some(traceId)
           val result = Source(nums)
             .groupBy(Int.MaxValue, identity)
-            .map { _ => currentTraceId() }
+            .map { num =>
+              num -> setTraceId(num.toString)
+            }
+            .async
+            .map { case (num, ctx) =>
+              val result = currentTraceId()
+              assert(result.contains(num.toString))
+              ctx.close()
+              result
+            }
             .mergeSubstreams
-            .map(inner => inner -> currentTraceId())
             .toMat(Sink.seq)(Keep.right)
             .run()
             .futureValue
 
           result should have size nums.size
-          result.flatMap(_._1) should have size nums.size
-          result.flatMap(_._2) should have size nums.size
+          result.flatten should contain allElementsOf nums.map(_.toString)
           currentTraceId() shouldBe Some(traceId)
         }
       }

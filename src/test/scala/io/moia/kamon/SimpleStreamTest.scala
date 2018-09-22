@@ -36,5 +36,22 @@ class SimpleStreamTest extends UnitTest with AkkaTest {
         }
       }
     }
+
+    "maintain traceIds created during the flow" in {
+      inContext("outer") {
+        Source(0.until(100))
+          .map( n => n -> setTraceId(n.toString) )
+          .map { case (n, scope) =>
+            assert( currentTraceId().contains(n.toString), s"In map async for n = $n: ${currentTraceId()} != $n" )
+            (n + 1) -> scope
+          }
+          .runFold(0) { case (acc, (m, scope)) =>
+            val n = m - 1
+            assert( currentTraceId().contains(n.toString), s"In run fold for n = $n: ${currentTraceId()} != $n" )
+            scope.close()
+            acc + m
+          }
+      }.futureValue shouldBe 5050
+    }
   }
 }
