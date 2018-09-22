@@ -65,8 +65,8 @@ final class ExampleCustomStage[I] extends GraphStage[FlowShape[I, I]] with Loggi
     )
 
     def pullIfNecessary(): Unit =
-      if (isClosed(in) && buffer.isEmpty) {
-        completeStage()
+      if (isClosed(in)) {
+        if (buffer.isEmpty) completeStage()
       } else if (!hasBeenPulled(in)) {
         pull(in)
       }

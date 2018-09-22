@@ -66,7 +66,7 @@ The context is gathered after elements are flowing from the custom stage.
 
 Expectation: the context is propagated and available after the custom stage. 
 
-**Status: Works!**
+**Status: not working.**
 
 ### 6) Graph stream processing
 See [io.moia.kamon.GraphTest](https://github.com/moia-dev/kamon-akka-streams-test-bed/blob/master/src/test/scala/io/moia/kamon/GraphTest.scala)
