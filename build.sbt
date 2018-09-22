@@ -7,8 +7,8 @@ lazy val root = (project in file(".")).
       organization :=  "io.moia",
       scalaVersion :=  "2.12.6",
       version      :=  "0.1.0-SNAPSHOT",
-      javaOptions  ++= globalJavaOptions
-      //fork in Test := true
+      javaOptions  ++= globalJavaOptions,
+      fork in Test := true
     )),
     name := "kamon-akka-streams-test-bed",
     libraryDependencies ++= Seq(
@@ -16,11 +16,13 @@ lazy val root = (project in file(".")).
       akkaStream % Compile,
       enumeratum % Compile,
       kamon % Compile,
+      akkaKamon % Compile,
       log4jApi % Compile,
       log4jCore % Compile,
       scalaLogging % Compile,
       logSlfOverLog4j % Compile,
-      akkaActorTestkitTyped % Test,
+      akkaActorTestkit % Test,
+      akkaStreamsTestKit % Test,
       scalaTest % Test,
       scalaCheck % Test
     )
